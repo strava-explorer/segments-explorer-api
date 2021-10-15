@@ -43,5 +43,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: segments-explorer-api:${{ steps.date.outputs.date }}
+        tags: ${{ steps.date.outputs.date }}
         labels: ${{ steps.meta.outputs.labels }}
