@@ -7,21 +7,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
       
-      - name: Maven vulnerabilities
+      - name: Scan Maven vulnerabilities
         uses: snyk/actions/maven-3-jdk-11@master
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --sarif-file-output=snyk.sarif
-          
-      - name: Run Snyk to check Docker image for vulnerabilities
-        continue-on-error: true
-        uses: snyk/actions/docker@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --file=Dockerfile
       
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v1
