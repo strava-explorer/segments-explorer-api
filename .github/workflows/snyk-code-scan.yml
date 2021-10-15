@@ -1,7 +1,7 @@
 name: Snyk Code 
 on: push
 jobs:
-  security:
+  snyk-code:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
