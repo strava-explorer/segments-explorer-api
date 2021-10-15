@@ -5,7 +5,7 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@release
       
       - name: Scan Maven vulnerabilities
         uses: snyk/actions/maven-3-jdk-11@master
