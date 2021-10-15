@@ -13,10 +13,14 @@ jobs:
         distribution: 'adopt'
        
     - name: Snyk Test 
-      run: snyk test
+      run: snyk test --json-file-output=snyk.json
       continue-on-error: true # To make sure that SARIF upload gets called
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        
+    - uses: garethr/snyk-to-sarif@master
+      with:
+        args: --sarif-file-output=snyk.sarif
         
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v1
