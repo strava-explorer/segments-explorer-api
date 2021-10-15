@@ -1,0 +1,6 @@
+strava:
+  client_id: ${STRAVA_CLIENT_ID}
+  client_secret: ${STRAVA_CLIENT_SECRET}
+  token_url: https://www.strava.com/api/v3/oauth/token
+
+allowed_origin: ${UI_ORIGIN}
