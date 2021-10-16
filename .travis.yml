@@ -10,8 +10,8 @@ services:
   - docker
 
 install:
-  - ./mvnw clean install
   - docker build -t dhavelock/segments-explorer:$TRAVIS_COMMIT .
+  - ./mvnw clean install
 
 deploy:
   provider: script
