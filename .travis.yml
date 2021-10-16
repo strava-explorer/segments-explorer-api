@@ -23,7 +23,7 @@ install:
 
 deploy:
   provider: script
-  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; docker push dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER
+  script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; docker push dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER; docker push dhavelock/segments-explorer:latest
   on:
     branch: release
 
