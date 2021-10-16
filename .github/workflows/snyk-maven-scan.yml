@@ -1,6 +1,9 @@
 name: Snyk Open Source
 
-on: push
+on:
+  push:
+    branches: [ release ]
+
 jobs:
   snyk-open-source:
     runs-on: ubuntu-latest

@@ -1,5 +1,9 @@
-name: Snyk Code 
-on: push
+name: Snyk Code
+
+on:
+  push:
+    branches: [ release ]
+
 jobs:
   snyk-code:
     runs-on: ubuntu-latest
