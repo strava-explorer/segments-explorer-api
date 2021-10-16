@@ -1,0 +1,1 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/strava-explorer/segments-explorer-api/badge.svg)](https://snyk.io/test/github/strava-explorer/segments-explorer-api)

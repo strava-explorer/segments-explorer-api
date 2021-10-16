@@ -3,7 +3,7 @@ WORKDIR /build
 COPY . /build
 RUN mvn clean package -Dsnyk.skip
 
-FROM openjdk:11-jre-slim AS app
+FROM openjdk:17-ea-22-jdk-oracle AS app
 WORKDIR /app
 COPY --from=build /build/target/segments-explorer-api-0.0.1-SNAPSHOT.jar /app/
 EXPOSE 8080

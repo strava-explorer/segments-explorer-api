@@ -9,12 +9,23 @@ jdk: openjdk11
 services:
   - docker
 
+before_install:
+  - nvm install 14
+  - node --version
+
 install:
+  -  ./mvnw clean install
   - docker build -t dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER .
-  - ./mvnw clean install
+  - npm install -g snyk
+  - snyk test --fail-on=all
+  - snyk code test --fail-on=all
+  - snyk container test dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER
 
 deploy:
   provider: script
   script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; docker push dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER
   on:
     branch: release
+
+after_deploy:
+  - snyk monitor
