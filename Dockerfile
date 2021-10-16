@@ -1,4 +1,4 @@
-FROM maven:3.8.3-jdk-11-slim AS build
+FROM maven:3.8.1-jdk-11-slim AS build
 WORKDIR /build
 COPY . /build
 RUN mvn clean package -Dsnyk.skip
