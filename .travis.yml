@@ -17,8 +17,8 @@ install:
   - docker build -t dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER .
   - ./mvnw clean install
   - npm install -g snyk
-  - snyk test
-  - snyk code test
+  - snyk test --fail-on=all
+  - snyk code test --fail-on=all
   - snyk container test dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER
 
 deploy:
