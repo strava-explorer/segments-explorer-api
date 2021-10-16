@@ -9,6 +9,10 @@ jdk: openjdk11
 services:
   - docker
 
+before_install:
+  - nvm install 14
+  - node --version
+
 install:
   - docker build -t dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER .
   - ./mvnw clean install
