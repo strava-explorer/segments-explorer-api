@@ -1,4 +1,5 @@
 name: Snyk Container
+
 on:
   push:
     branches: [ release ]

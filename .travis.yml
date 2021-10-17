@@ -20,6 +20,7 @@ install:
   - snyk test --fail-on=all
   - snyk code test --fail-on=all
   - snyk container test dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER
+  - snyk iac test --severity-threshold=high
 
 deploy:
   provider: script

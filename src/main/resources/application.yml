@@ -2,5 +2,3 @@ strava:
   client_id: ${STRAVA_CLIENT_ID:client_id}
   client_secret: ${STRAVA_CLIENT_SECRET:client_secret}
   token_url: https://www.strava.com/api/v3/oauth/token
-
-allowed_origin: ${UI_ORIGIN:http://localhost:3000}

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: segments-explorer
+  labels:
+    app: segments-explorer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: segments-explorer
+  template:
+    metadata:
+      labels:
+        app: segments-explorer
+    spec:
+      containers:
+        - name: segments-explorer
+          image: dhavelock/segments-explorer:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: STRAVA_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: segments-api-secret
+                  key: segments-api-strava-client-id
+            - name: STRAVA_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: segments-api-secret
+                  key: segments-api-secret-strava-client-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: segments-explorer-service
+spec:
+  selector:
+    app: segments-explorer
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30001
