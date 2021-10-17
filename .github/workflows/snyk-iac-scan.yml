@@ -6,15 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: snyk/actions/setup@master
 
       - name: Run Snyk to check configuration files for security issues
         continue-on-error: true
-        uses: snyk/actions/iac@master
+        run: snyk iac test --sarif > snyk.sarif
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          file: segments-api-deploymeny.yaml
-          sarif: true
 
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v1
