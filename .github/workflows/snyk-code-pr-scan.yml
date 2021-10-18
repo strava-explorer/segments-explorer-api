@@ -1,8 +1,8 @@
 name: example
 on: pull_request
 jobs:
-  example:
-    name: example
+  snyk-code:
+    name: Snyk Code
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -34,6 +34,14 @@ jobs:
       - run: html2md -i output.html -o comment.md --gfm
 
       - run: sed -i -e $'s/Vuln Type/---------------------\\\nVuln Type/g' comment.md
+
+      - uses: maheshrayas/action-pr-comment-delete@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          org: strava-explorer
+          repo: segments-explorer-api
+          user: 'github-actions[bot]'
+          issue: ${{ github.event.number }}
 
       - name: comment PR
         uses: machine-learning-apps/pr-comment@master
