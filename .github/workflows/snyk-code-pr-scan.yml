@@ -19,20 +19,25 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      - name: Upload Snyk output file
-        uses: actions/upload-artifact@v2
-        with:
-          name: snyk
-          path: ${{ github.workspace }}/snyk.json
 
-      - name: Markdown autodocs
-        uses: dineshsonachalam/markdown-autodocs@v1.0.4
+      - uses: actions/setup-python@v2
         with:
-          output_file_paths: '[./comment.md]'
+          python-version: '3.x'
+      - run: curl https://github.com/adamsnyk/snyk-code-test-handler/blob/master/code_test_report/__main__.py > htmlgen.py
+      - run: cat snyk.json | htmlgen.py
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install -g to-markdown-cli
+
+      - run: html2md -i output.html -o comment.md --gfm
+
+      - run: sed -i -e $'s/Vuln Type/---------------------\\\nVuln Type/g' comment.md
 
       - name: comment PR
         uses: machine-learning-apps/pr-comment@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: ${{ github.workspace }}/comment.md
+          path: comment.md
