@@ -25,7 +25,6 @@ jobs:
           name: snyk
           path: ${{ github.workspace }}/snyk.json
 
-      - run: touch comment.md
       - name: Markdown autodocs
         uses: dineshsonachalam/markdown-autodocs@v1.0.4
         with:
@@ -36,4 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: comment.md
+          path: ${{ github.workspace }}/comment.md
