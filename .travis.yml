@@ -19,8 +19,10 @@ install:
   - npm install -g snyk
   - snyk test --fail-on=all
   - snyk code test --fail-on=all
-  - snyk container test dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER
+  - snyk container test dhavelock/segments-explorer:$TRAVIS_BUILD_NUMBER --fail-on=all
   - snyk iac test --severity-threshold=high
+
+script: echo "Success!"
 
 deploy:
   provider: script

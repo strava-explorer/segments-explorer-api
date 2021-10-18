@@ -22,10 +22,6 @@ public class AuthController {
             @RequestParam String accessToken
     ) {
 
-        if (!accessToken.matches("[a-zA-Z0-9]*")) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-
         final String authorizationCode = stravaAuthorizationService.getAuthorizationCode(accessToken);
 
         return ResponseEntity.ok(
