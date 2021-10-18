@@ -23,8 +23,8 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - run: curl https://github.com/adamsnyk/snyk-code-test-handler/blob/master/code_test_report/__main__.py > htmlgen.py
-      - run: cat snyk.json | htmlgen.py
+      - run: curl https://raw.githubusercontent.com/adamsnyk/snyk-code-test-handler/master/code_test_report/__main__.py > htmlgen.py
+      - run: cat snyk.json | python3 htmlgen.py
 
       - uses: actions/setup-node@v2
         with:
