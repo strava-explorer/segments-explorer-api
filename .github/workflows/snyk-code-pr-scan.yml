@@ -1,0 +1,34 @@
+name: example
+on: pull_request
+jobs:
+  example:
+    name: example
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: snyk/actions/setup@master
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Run Snyk Code to check for vulnerabilities
+        run: snyk code test --json > snyk.json
+        continue-on-error: true # To make sure that SARIF upload gets called
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: snyk.json
+      - uses: actions/download-artifact@v1
+        with:
+          name: snyk.json
+
+      - name: comment PR
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: snyk.json
