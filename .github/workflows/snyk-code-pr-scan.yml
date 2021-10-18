@@ -19,9 +19,20 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
+      - name: Upload Snyk output file
+        uses: actions/upload-artifact@v2
+        with:
+          name: snyk
+          path: ${{ github.workspace }}/snyk.json
+
+      - name: Markdown autodocs
+        uses: dineshsonachalam/markdown-autodocs@v1.0.4
+        with:
+          output_file_paths: '[./comment.md]'
+
       - name: comment PR
         uses: machine-learning-apps/pr-comment@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: snyk.json
+          path: comment.md
