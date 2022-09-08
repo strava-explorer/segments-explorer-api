@@ -866,75 +866,6 @@
         }
       }
     },
-    "/running_races/{id}": {
-      "get": {
-        "operationId": "getRunningRaceById",
-        "summary": "Get Running Race",
-        "description": "Returns a running race for a given identifier.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The identifier of the running race.",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "RunningRaces"
-        ],
-        "responses": {
-          "200": {
-            "description": "Representation of a running race.",
-            "schema": {
-              "$ref": "https://developers.strava.com/swagger/running_race.json#/RunningRace"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "https://developers.strava.com/swagger/fault.json#/Fault"
-            }
-          }
-        }
-      }
-    },
-    "/running_races": {
-      "get": {
-        "operationId": "getRunningRaces",
-        "summary": "List Running Races",
-        "description": "Returns a list running races based on a set of search criteria.",
-        "parameters": [
-          {
-            "name": "year",
-            "in": "query",
-            "description": "Filters the list by a given year.",
-            "type": "integer"
-          }
-        ],
-        "tags": [
-          "RunningRaces"
-        ],
-        "responses": {
-          "200": {
-            "description": "Representation of a list of running race.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "https://developers.strava.com/swagger/running_race.json#/RunningRace"
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "https://developers.strava.com/swagger/fault.json#/Fault"
-            }
-          }
-        }
-      }
-    },
     "/activities": {
       "post": {
         "operationId": "createActivity",
@@ -952,6 +883,13 @@
             "name": "type",
             "in": "formData",
             "description": "Type of activity. For example - Run, Ride etc.",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "sport_type",
+            "in": "formData",
+            "description": "Sport type of activity. For example - Run, MountainBikeRide, Ride, etc.",
             "type": "string",
             "required": true
           },
@@ -1025,6 +963,7 @@
                 "elapsed_time": 18373,
                 "total_elevation_gain": 0,
                 "type": "Ride",
+                "sport_type": "MountainBikeRide",
                 "start_date": "2018-02-20T18:02:13Z",
                 "start_date_local": "2018-02-20T10:02:13Z",
                 "timezone": "(GMT-08:00) America/Los_Angeles",
@@ -1115,6 +1054,7 @@
                 "elapsed_time": 4410,
                 "total_elevation_gain": 516,
                 "type": "Ride",
+                "sport_type": "MountainBikeRide",
                 "start_date": "2018-02-16T14:52:54Z",
                 "start_date_local": "2018-02-16T06:52:54Z",
                 "timezone": "(GMT-08:00) America/Los_Angeles",
@@ -1289,6 +1229,7 @@
                     "show_name": true
                   }
                 ],
+                "hide_from_home": false,
                 "device_name": "Garmin Edge 1030",
                 "embed_token": "18e4615989b47dd4ff3dc711b0aa4502e4b311a9",
                 "segment_leaderboard_opt_out": false,
@@ -1350,6 +1291,7 @@
                 "elapsed_time": 4410,
                 "total_elevation_gain": 516,
                 "type": "Ride",
+                "sport_type": "MountainBikeRide",
                 "start_date": "2018-02-16T14:52:54Z",
                 "start_date_local": "2018-02-16T06:52:54Z",
                 "timezone": "(GMT-08:00) America/Los_Angeles",
@@ -1527,6 +1469,7 @@
                     "show_name": true
                   }
                 ],
+                "hide_from_home": false,
                 "device_name": "Garmin Edge 1030",
                 "embed_token": "18e4615989b47dd4ff3dc711b0aa4502e4b311a9",
                 "segment_leaderboard_opt_out": false,
@@ -1582,125 +1525,127 @@
             },
             "examples": {
               "application/json": [
-                {
-                  "resource_state": 2,
-                  "athlete": {
-                    "id": 134815,
-                    "resource_state": 1
-                  },
-                  "name": "Happy Friday",
-                  "distance": 24931.4,
-                  "moving_time": 4500,
-                  "elapsed_time": 4500,
-                  "total_elevation_gain": 0,
-                  "type": "Ride",
-                  "workout_type": null,
-                  "id": 154504250376823,
-                  "external_id": "garmin_push_12345678987654321",
-                  "upload_id": 987654321234567891234,
-                  "start_date": "2018-05-02T12:15:09Z",
-                  "start_date_local": "2018-05-02T05:15:09Z",
-                  "timezone": "(GMT-08:00) America/Los_Angeles",
-                  "utc_offset": -25200,
-                  "start_latlng": null,
-                  "end_latlng": null,
-                  "location_city": null,
-                  "location_state": null,
-                  "location_country": "United States",
-                  "achievement_count": 0,
-                  "kudos_count": 3,
-                  "comment_count": 1,
-                  "athlete_count": 1,
-                  "photo_count": 0,
-                  "map": {
-                    "id": "a12345678987654321",
-                    "summary_polyline": null,
-                    "resource_state": 2
-                  },
-                  "trainer": true,
-                  "commute": false,
-                  "manual": false,
-                  "private": false,
-                  "flagged": false,
-                  "gear_id": "b12345678987654321",
-                  "from_accepted_tag": false,
-                  "average_speed": 5.54,
-                  "max_speed": 11,
-                  "average_cadence": 67.1,
-                  "average_watts": 175.3,
-                  "weighted_average_watts": 210,
-                  "kilojoules": 788.7,
-                  "device_watts": true,
-                  "has_heartrate": true,
-                  "average_heartrate": 140.3,
-                  "max_heartrate": 178,
-                  "max_watts": 406,
-                  "pr_count": 0,
-                  "total_photo_count": 1,
-                  "has_kudoed": false,
-                  "suffer_score": 82
-                },
-                {
-                  "resource_state": 2,
-                  "athlete": {
-                    "id": 167560,
-                    "resource_state": 1
-                  },
-                  "name": "Bondcliff",
-                  "distance": 23676.5,
-                  "moving_time": 5400,
-                  "elapsed_time": 5400,
-                  "total_elevation_gain": 0,
-                  "type": "Ride",
-                  "workout_type": null,
-                  "id": 1234567809,
-                  "external_id": "garmin_push_12345678987654321",
-                  "upload_id": 1234567819,
-                  "start_date": "2018-04-30T12:35:51Z",
-                  "start_date_local": "2018-04-30T05:35:51Z",
-                  "timezone": "(GMT-08:00) America/Los_Angeles",
-                  "utc_offset": -25200,
-                  "start_latlng": null,
-                  "end_latlng": null,
-                  "location_city": null,
-                  "location_state": null,
-                  "location_country": "United States",
-                  "achievement_count": 0,
-                  "kudos_count": 4,
-                  "comment_count": 0,
-                  "athlete_count": 1,
-                  "photo_count": 0,
-                  "map": {
-                    "id": "a12345689",
-                    "summary_polyline": null,
-                    "resource_state": 2
-                  },
-                  "trainer": true,
-                  "commute": false,
-                  "manual": false,
-                  "private": false,
-                  "flagged": false,
-                  "gear_id": "b12345678912343",
-                  "from_accepted_tag": false,
-                  "average_speed": 4.385,
-                  "max_speed": 8.8,
-                  "average_cadence": 69.8,
-                  "average_watts": 200,
-                  "weighted_average_watts": 214,
-                  "kilojoules": 1080,
-                  "device_watts": true,
-                  "has_heartrate": true,
-                  "average_heartrate": 152.4,
-                  "max_heartrate": 183,
-                  "max_watts": 403,
-                  "pr_count": 0,
-                  "total_photo_count": 1,
-                  "has_kudoed": false,
-                  "suffer_score": 162
+                    {
+                        "resource_state": 2,
+                        "athlete": {
+                            "id": 134815,
+                            "resource_state": 1
+                        },
+                        "name": "Happy Friday",
+                        "distance": 24931.4,
+                        "moving_time": 4500,
+                        "elapsed_time": 4500,
+                        "total_elevation_gain": 0,
+                        "type": "Ride",
+                        "sport_type": "MountainBikeRide",
+                        "workout_type": null,
+                        "id": 154504250376823,
+                        "external_id": "garmin_push_12345678987654321",
+                        "upload_id": 987654321234567891234,
+                        "start_date": "2018-05-02T12:15:09Z",
+                        "start_date_local": "2018-05-02T05:15:09Z",
+                        "timezone": "(GMT-08:00) America/Los_Angeles",
+                        "utc_offset": -25200,
+                        "start_latlng": null,
+                        "end_latlng": null,
+                        "location_city": null,
+                        "location_state": null,
+                        "location_country": "United States",
+                        "achievement_count": 0,
+                        "kudos_count": 3,
+                        "comment_count": 1,
+                        "athlete_count": 1,
+                        "photo_count": 0,
+                        "map": {
+                            "id": "a12345678987654321",
+                            "summary_polyline": null,
+                            "resource_state": 2
+                        },
+                        "trainer": true,
+                        "commute": false,
+                        "manual": false,
+                        "private": false,
+                        "flagged": false,
+                        "gear_id": "b12345678987654321",
+                        "from_accepted_tag": false,
+                        "average_speed": 5.54,
+                        "max_speed": 11,
+                        "average_cadence": 67.1,
+                        "average_watts": 175.3,
+                        "weighted_average_watts": 210,
+                        "kilojoules": 788.7,
+                        "device_watts": true,
+                        "has_heartrate": true,
+                        "average_heartrate": 140.3,
+                        "max_heartrate": 178,
+                        "max_watts": 406,
+                        "pr_count": 0,
+                        "total_photo_count": 1,
+                        "has_kudoed": false,
+                        "suffer_score": 82
+                    },
+                    {
+                        "resource_state": 2,
+                        "athlete": {
+                            "id": 167560,
+                            "resource_state": 1
+                        },
+                        "name": "Bondcliff",
+                        "distance": 23676.5,
+                        "moving_time": 5400,
+                        "elapsed_time": 5400,
+                        "total_elevation_gain": 0,
+                        "type": "Ride",
+                        "sport_type": "MountainBikeRide",
+                        "workout_type": null,
+                        "id": 1234567809,
+                        "external_id": "garmin_push_12345678987654321",
+                        "upload_id": 1234567819,
+                        "start_date": "2018-04-30T12:35:51Z",
+                        "start_date_local": "2018-04-30T05:35:51Z",
+                        "timezone": "(GMT-08:00) America/Los_Angeles",
+                        "utc_offset": -25200,
+                        "start_latlng": null,
+                        "end_latlng": null,
+                        "location_city": null,
+                        "location_state": null,
+                        "location_country": "United States",
+                        "achievement_count": 0,
+                        "kudos_count": 4,
+                        "comment_count": 0,
+                        "athlete_count": 1,
+                        "photo_count": 0,
+                        "map": {
+                            "id": "a12345689",
+                            "summary_polyline": null,
+                            "resource_state": 2
+                        },
+                        "trainer": true,
+                        "commute": false,
+                        "manual": false,
+                        "private": false,
+                        "flagged": false,
+                        "gear_id": "b12345678912343",
+                        "from_accepted_tag": false,
+                        "average_speed": 4.385,
+                        "max_speed": 8.8,
+                        "average_cadence": 69.8,
+                        "average_watts": 200,
+                        "weighted_average_watts": 214,
+                        "kilojoules": 1080,
+                        "device_watts": true,
+                        "has_heartrate": true,
+                        "average_heartrate": 152.4,
+                        "max_heartrate": 183,
+                        "max_watts": 403,
+                        "pr_count": 0,
+                        "total_photo_count": 1,
+                        "has_kudoed": false,
+                        "suffer_score": 162
+                    }
+                  ]
                 }
-              ]
-            }
-          },
+              },
           "default": {
             "description": "Unexpected error.",
             "schema": {
@@ -1961,6 +1906,7 @@
                 "cover_photo": "https://dgalywyr863hv.cloudfront.net/pictures/clubs/1/4328276/1/large.jpg",
                 "cover_photo_small": "https://dgalywyr863hv.cloudfront.net/pictures/clubs/1/4328276/1/small.jpg",
                 "sport_type": "cycling",
+                "activity_types": ["Ride", "VirtualRide", "EBikeRide", "Velomobile", "Handcycle"],
                 "city": "San Francisco",
                 "state": "California",
                 "country": "United States",
@@ -2144,6 +2090,7 @@
                   "elapsed_time": 635,
                   "total_elevation_gain": 8.8,
                   "type": "Ride",
+                  "sport_type": "MountainBikeRide",
                   "workout_type": null
                 }
               ]
@@ -2353,8 +2300,8 @@
             "content": {
               "application/gpx+xml" : {
                 "schema": {
-                  "type" : "string",
-                  "format": "binary"
+                   "type" : "string",
+                   "format": "binary"
                 }
               }
             }
@@ -2392,8 +2339,8 @@
             "content": {
               "application/tcx+xml" : {
                 "schema": {
-                  "type" : "string",
-                  "format": "binary"
+                   "type" : "string",
+                   "format": "binary"
                 }
               }
             }
